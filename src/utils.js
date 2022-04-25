@@ -1,11 +1,11 @@
 regex = /blocked by ([#\d, ]+)/ig
 
-const signature = "This comment was automatically written by the [Blocking Issues](https://github.com/Levi-Lesches/blocking-issues) bot, and this PR will be monitored for further progress.";
+const signature = "This comment was automatically written by babs-bot.";
 
 const blockedLabel = {
 	name: "blocked",
 	color: "000000",
-	description: "This PR needs is waiting for one or more issues to be closed.",
+	description: "This issue needs is waiting for one or more dependencies to be closed.",
 }
 
 function getBlockingIssues(body) {
@@ -22,7 +22,7 @@ function getBlockingIssues(body) {
 function getCommentText(blockingIssues, openIssues) {
 	const isBlocked = openIssues.length > 0
 	var result = "";
-	result += `# Status: ${isBlocked ? "Blocked :x:" : "Ready to merge :heavy_check_mark:"}\n`;
+	result += `# Status: ${isBlocked ? "Blocked :x:" : "Ready and waiting :heavy_check_mark:"}\n`;
 	result += "### Issues blocking this PR: \n";
 	for (issue of blockingIssues) {
 		var isOpen = openIssues.includes(issue);
