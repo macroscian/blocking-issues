@@ -65,8 +65,9 @@ async function unblockPRs(issueNumber) {
 		blockingIssues = utils.getBlockingIssues(pr.body);
 		console.log(`  PR is blocked by ${blockingIssues}`);
 		if (!blockingIssues.includes(issueNumber)) continue;
-		console.log("  Rerunning action on PR");
-		await github.rerunUpdate(pr.number);
+	    console.log("  Rerunning action on PR");
+	    const cascade_issue=await github.getIssue(issueNumber);
+	    await update(cascade_issue);
 	}
 }
 

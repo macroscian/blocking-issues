@@ -133,11 +133,11 @@ async function getBlockedPRs() {
 
 
 
-async function rerunUpdate(issueNumber) {
-	console.log(`    Getting PR #${issueNumber}`);
-	const pr = await getIssue(issueNumber);
-    await model.update(pr);
-}
+// async function rerunUpdate(issueNumber) {
+// 	console.log(`    Getting PR #${issueNumber}`);
+// 	const pr = await getIssue(issueNumber);
+//     await model.update(pr);
+// }
 
 module.exports = {
 	// Issues
@@ -157,5 +157,5 @@ module.exports = {
 	getCommentID,
 	writeComment,
 
-	rerunUpdate,
+//	rerunUpdate,
 }
