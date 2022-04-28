@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const utils = require("./utils.js");
+const model = require("./model.js");
 
 const token = core.getInput("token");
 const octokit = github.getOctokit(token);
@@ -135,7 +136,7 @@ async function getBlockedPRs() {
 async function rerunUpdate(issueNumber) {
 	console.log(`    Getting PR #${issueNumber}`);
 	const pr = await getIssue(issueNumber);
-    await update(pr);
+    await model.update(pr);
 }
 
 module.exports = {
