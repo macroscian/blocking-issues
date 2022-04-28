@@ -51,7 +51,7 @@ async function update(issue) {
 }
 
 async function getOpenIssues() {
-    await github.getOpenIssues();
+    return await github.getOpenIssues();
 }
 
 module.exports = {
