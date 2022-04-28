@@ -50,9 +50,12 @@ async function update(issue) {
     return openIssues.length == 0;
 }
 
-
+async function getOpenIssues() {
+    await github.getOpenIssues();
+}
 
 module.exports = {
     initLabels,
+    getOpenIssues,
     update,
 }

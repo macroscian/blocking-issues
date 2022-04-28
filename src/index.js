@@ -1,12 +1,13 @@
 const core = require('@actions/core');
 const model = require('./model.js');
 
+
 async function main() {
     try {
 	console.log("Initializing labels");
 	await model.initLabels();
 	console.log("Getting issue");
-	const issues = await github.getOpenIssues();
+	const issues = await model.getOpenIssues();
 	var isReady=false;
 	for (issue of issues) {
 	    
