@@ -3,7 +3,7 @@ regex = /blocked by ([#\d, ]+)/ig
 const signature = "This comment was automatically written by babs-bot.";
 
 const blockedLabel = {
-    name: "blocked",
+    name: "Blocked",
     color: "000000",
     description: "This issue needs is waiting for one or more dependencies to be closed.",
 }

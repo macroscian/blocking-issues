@@ -6,6 +6,11 @@ async function initLabels() {
     const labels = await github.getLabels();
     var hasBlockedLabel = false;
     for (label of labels) {
+	if (label.name === utils.blockedLabel.name.toLowerCase()) {
+	    // Fix old lowercase 'blocked' to be 'Blocked'
+	    github.updateLabel(label, utils.blockedLabel.name);
+	    hasBlockedLabel = true;
+	}
 	if (label.name === utils.blockedLabel.name) hasBlockedLabel = true;
     }
     if (!hasBlockedLabel) {
@@ -20,7 +25,7 @@ async function update(issue) {
 
     if (blockingIssueNumbers.length == 0) {
 	console.log("No blocking issues -- removing comment and label");
-	await github.removeLabel(issue.number, "blocked");
+	await github.removeLabel(issue.number, utils.blockedLabel.name);
 	// If comment is present, remove it
 	const oldComment = await github.getCommentID(issue.number);
 	if (oldComment) {
@@ -45,8 +50,8 @@ async function update(issue) {
     
     const isBlocked = openIssues.length > 0;
     console.log(`Applying label? ${isBlocked}`);
-    if (isBlocked) await github.applyLabel(issue.number, "blocked");
-    else await github.removeLabel(issue.number, "blocked");
+    if (isBlocked) await github.applyLabel(issue.number, utils.blockedLabel.name);
+    else await github.removeLabel(issue.number, utils.blockedLabel.name);
     return openIssues.length == 0;
 }
 

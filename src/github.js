@@ -28,6 +28,16 @@ async function createLabel(label) {
     })
 }
 
+async function updateLabel(label, newName) {
+    await octokit.rest.issues.updateLabel({
+	owner: github.context.repo.owner,
+	repo: github.context.repo.repo,
+	name: label.name,
+	new_name: newName
+    })
+}
+
+
 async function getIssue(number) {
     var json = await octokit.rest.issues.get({
 	owner: github.context.repo.owner,
@@ -156,6 +166,7 @@ module.exports = {
     // labels
     getLabels,
     createLabel,
+    updateLabel,
     applyLabel,
     removeLabel,
     getBlockedIssues,
